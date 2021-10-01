@@ -33,8 +33,8 @@ AppAsset::register($this);
                 <div class="col-md-10">
                     <div class="menu">
                         <ul>
-                            <li><a href="<?= URL::to(['home/index']) ?>">Главная</a></li>
-                            <li><a href="#">Админка</a></li>
+                            <li><a href="<?= URL::to(['/home/index']) ?>">Главная</a></li>
+                            <li><a href="<?= URL::to(['/admin']) ?>">Админка</a></li>
                         </ul>
                     </div>
                 </div>
