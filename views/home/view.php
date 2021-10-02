@@ -17,7 +17,7 @@ $this->title = Yii::$app->name;
                         <div class="blog-area">
                             <?php foreach ($query as $item): ?>
                                 <div class="blog-area-part">
-                                    <?php if (isset($item['image']) == true): ?>
+                                    <?php if (($item['image']) != null): ?>
                                         <?php echo Html::img('@web/img/'.$item['image']) ?>
                                     <?php endif; ?>
                                     <h2><?= $item['heading'];?></h2>

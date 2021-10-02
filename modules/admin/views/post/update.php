@@ -6,9 +6,10 @@ use yii\helpers\Html;
 /* @var $model app\models\Post */
 
 $this->title = 'Update Post: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Посты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
+$this->title = 'Обновить пост';
 ?>
 <section class="blog-post-area">
     <div class="container">
@@ -17,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Update';
                 <div class="border-top">
                     <div class="blog-area">
                         <h1><?= Html::encode($this->title) ?></h1>
+                        <br>
 
                         <?= $this->render('_form', [
                             'model' => $model,

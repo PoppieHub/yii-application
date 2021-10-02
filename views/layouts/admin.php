@@ -1,9 +1,11 @@
 <?php
 
 use app\assets\AppAsset;
+use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap4\Modal;
+use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
 ?>
@@ -43,6 +45,15 @@ AppAsset::register($this);
                 </div>
             </div>
         </header>
+
+        <main role="main" class="flex-shrink-0">
+            <div class="container">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+            </div>
+        </main>
 
         <?= $content ?>
     </div>

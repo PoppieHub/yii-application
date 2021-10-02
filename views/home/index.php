@@ -18,7 +18,7 @@ $this->title = Yii::$app->name;
                             foreach ($news as $post): ?>
                             <div class="col-md-3">
                                 <div class="single-post">
-                                <?php if (isset($post->image) == true): ?>
+                                <?php if (($post->image) != null): ?>
                                     <?php echo Html::img('@web/img/'.$post->image, ['width' => '80', 'height' => '150']) ?>
                                 <?php endif; ?>
                                     <h3><a href="<?= URL::to(['home/view', 'id' => $post->id]) ?>"><?= $post->heading ?></a></h3>

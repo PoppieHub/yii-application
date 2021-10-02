@@ -7,19 +7,19 @@ use yii\grid\GridView;
 /* @var $searchModel \app\models\PostSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = 'Посты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="blog-post-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="border-top">
                     <div class="blog-area">
                         <h1><?= Html::encode($this->title) ?></h1>
 
                         <p>
-                            <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('Создать пост', ['create'], ['class' => 'btn btn-success']) ?>
                         </p>
 
                         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -37,6 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'image',
                                 //'publication_date',
                                 //'category_id',
+
+                                [
+                                    'format' => 'html',
+                                    'label' => 'Show Image',
+                                    'value' => function($data){
+                                        return Html::img($data->getImage(), ['width'=>200]);
+                                    }
+                                ],
 
                                 ['class' => 'yii\grid\ActionColumn'],
                             ],

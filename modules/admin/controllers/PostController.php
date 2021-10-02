@@ -4,9 +4,13 @@ namespace app\modules\admin\controllers;
 
 use app\models\Post;
 use app\models\PostSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use app\models\FileUpload;
+
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -118,7 +122,7 @@ class PostController extends Controller
     /**
      * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
+     * @param integer $id
      * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -126,8 +130,30 @@ class PostController extends Controller
     {
         if (($model = Post::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionSetImage($id)
+    {
+        $model = new FileUpload();
+
+        if(Yii::$app->request->isPost) {
+
+            $post = $this->findModel($id);
+            $file = UploadedFile::getInstance($model, 'image');
+
+            if ($post->saveFile($model->uploadFile($file, $post->image))){
+                return $this->redirect(['post/view', 'id' => $post->id]);
+            }
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        return $this->render('image', compact('model'));
     }
+
+
 }
