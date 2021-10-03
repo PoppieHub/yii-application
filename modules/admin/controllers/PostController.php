@@ -2,9 +2,12 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Category;
 use app\models\Post;
 use app\models\PostSearch;
+use app\models\Tag;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -155,5 +158,35 @@ class PostController extends Controller
         return $this->render('image', compact('model'));
     }
 
+    public function actionSetCategory($id)
+    {
+        $post = $this->findModel($id);
+        $currentCategory = $post->category_id;
+        $categories = ArrayHelper::map(Category::find()->all(),'id','name');
 
+        if (Yii::$app->request->isPost){
+            $category = Yii::$app->request->post('category');
+            $post->saveCategory($category);
+
+            return $this->redirect(['post/view', 'id' => $id]);
+        }
+
+        return $this->render('category',compact('post', 'currentCategory', 'categories'));
+    }
+
+    public function actionSetTags($id)
+    {
+        $post = $this->findModel($id);
+        $currentTags = $post->getCurrentTags();
+        $tags = ArrayHelper::map(Tag::find()->all(),'id','name');
+
+        if (Yii::$app->request->isPost){
+            $tags = Yii::$app->request->post('tags');
+            $post->saveTags($tags);
+
+            return $this->redirect(['post/view', 'id' => $id]);
+        }
+
+        return $this->render('tags',compact('post', 'currentTags', 'tags'));
+    }
 }

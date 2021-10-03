@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "post".
@@ -70,6 +71,16 @@ class Post extends ActiveRecord
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
+    /**
+     *
+     * @return ActiveQuery
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])
+            ->viaTable('tag_post', ['post_id' => 'id']);
+    }
+
     public function saveFile($filename)
     {
         $this->image = $filename;
@@ -91,6 +102,44 @@ class Post extends ActiveRecord
     public function getImage()
     {
         return ($this->image) ? '/img/'.$this->image: '';
+    }
+
+    public function saveCategory($category_id)
+    {
+        $this->category_id = $category_id;
+
+        return $this->save(false);
+    }
+
+    public function getCurrentTags()
+    {
+        $currentTags = $this->getTags()->select('id')->asArray()->all();
+        return ArrayHelper::getColumn($currentTags, 'id');
+    }
+
+    public function getCurrentTagsName()
+    {
+        $currentTags = $this->getTags()->select('name')->asArray()->all();
+        return ArrayHelper::getColumn($currentTags, 'name');
+    }
+
+
+    public function deleteCurrentTags()
+    {
+        return TagPost::deleteAll(['post_id' => $this->id]);
+    }
+
+    public function saveTags($tags)
+    {
+        $this->deleteCurrentTags();
+
+        if (is_array($tags)){
+            foreach ($tags as $tag_id)
+            {
+                $tag = Tag::findOne($tag_id);
+                $this->link('tags', $tag);
+            }
+        }
     }
 
 }

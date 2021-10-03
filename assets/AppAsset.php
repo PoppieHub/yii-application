@@ -29,11 +29,18 @@ class AppAsset extends AssetBundle
         'css/owl.theme.default.min.css',
         'style.css',
         'responsive.css',
+        'uikit.css',
+        'uikit.min.css',
+        'uikit-rtl.css',
+        'uikit-rtl.min.css',
     ];
     public $js = [
         'js/bootstrap.min.js',
         'js/owl.carousel.min.js',
         'js/active.js',
+        'js/uikit.js',
+        'js/uikit.min.js',
+        'js/uikit-icons.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

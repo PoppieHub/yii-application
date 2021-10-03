@@ -23,11 +23,13 @@ $this->title = 'Просмотор поста';
                         <br>
                         <p>
                             <?= Html::a('Загрузить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+                            <?= Html::a('Добавить категорию', ['set-category', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+                            <?= Html::a('Добавить Тег', ['set-tags', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
                             <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                             <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                                 'class' => 'btn btn-danger',
                                 'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'confirm' => 'Вы уверены, что хотите удалить этот элемент?',
                                     'method' => 'post',
                                 ],
                             ]) ?>

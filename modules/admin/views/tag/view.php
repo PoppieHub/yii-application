@@ -7,31 +7,41 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Tag */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Теги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="tag-view">
+<section class="blog-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="border-top">
+                    <div class="blog-area">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                        <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+                        <p>
+                            <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => 'Вы уверены, что хотите удалить этот элемент?',
+                                    'method' => 'post',
+                                ],
+                            ]) ?>
+                        </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-        ],
-    ]) ?>
+                        <?= DetailView::widget([
+                            'model' => $model,
+                            'attributes' => [
+                                'id',
+                                'name',
+                            ],
+                        ]) ?>
 
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
