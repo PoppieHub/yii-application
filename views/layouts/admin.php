@@ -29,7 +29,7 @@ AppAsset::register($this);
                 <div class="row">
                     <div class="col-md-2">
                         <div class="logo">
-                            <h2><a href="<?= URL::to(['home/index']) ?>">News</a></h2>
+                            <h2><a href="<?= URL::to(['/home/index']) ?>">News</a></h2>
                         </div>
                     </div>
                     <div class="col-md-10">
